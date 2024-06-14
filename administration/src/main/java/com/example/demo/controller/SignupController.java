@@ -11,14 +11,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.form.SignupForm;
+import com.example.demo.service.SignupService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 
 @Controller
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class SignupController {
+	
+	private final SignupService signupService;
+	
 	
 	@GetMapping("/signup")
 	public String signup(Model model) {
@@ -44,7 +50,6 @@ public class SignupController {
 	@GetMapping("/signup/confirm")
 	public String confirm(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		
 		SignupForm signupForm = (SignupForm) session.getAttribute("signupForm");
 		model.addAttribute("signupForm", signupForm);
 		return "confirmation";
@@ -54,7 +59,10 @@ public class SignupController {
 	public String register(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-        session.removeAttribute("signupForm");
+		SignupForm signupForm = (SignupForm) session.getAttribute("signupForm");
+		
+		signupService.registerAdmins(signupForm);
+		session.removeAttribute("signupForm");
         
         return "redirect:/admin/signin";
 	}

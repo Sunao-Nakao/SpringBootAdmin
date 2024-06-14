@@ -6,7 +6,7 @@ import java.io.Serializable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 //import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+//import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 
@@ -23,7 +23,7 @@ public class SignupForm implements Serializable {
     private String email;
 	
 	@NotBlank
-	@Size(min = 8, max = 16)
+//	@Size(min = 8, max = 16)
     private String password;
 }
 

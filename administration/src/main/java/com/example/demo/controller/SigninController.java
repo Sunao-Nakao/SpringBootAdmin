@@ -7,14 +7,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.form.SigninForm;
+import com.example.demo.service.SigninService;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class SigninController {
 	
-	private static final String EMAIL = "user";
-			
-	private static final String PASSWORD = "pwd";
+	
+	private final SigninService service;
 	
 	
 	@GetMapping("/signin")
@@ -26,8 +29,9 @@ public class SigninController {
 	
 	@PostMapping("/signin")
 	public String signin(Model model, SigninForm form) {
-		var isCorrectUserAuth = form.getEmail().equals(EMAIL)
-				&&form.getPassword().equals(PASSWORD);
+		var admins =service.searchUserById(form.getEmail());
+		var isCorrectUserAuth = admins.isPresent()
+				&&form.getPassword().equals(admins.get().getPassword());
 		if(isCorrectUserAuth) {
 			return "redirect:/admin/contacts";
 		}else{
