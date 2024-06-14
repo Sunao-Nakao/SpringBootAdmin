@@ -11,3 +11,5 @@ public class SignupData {
     private String email;
     private String password;	
 }
+
+
