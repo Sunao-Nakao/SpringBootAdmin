@@ -15,8 +15,8 @@ public class SigninService {
 
 	private final AdminsRepository repository;
 	
-	public Optional<Admins> searchUserById(String email) {
-		return repository.findById(email);
+	public Optional<Admins> searchUserByEmail(String email) {
+		return repository.findByEmail(email);
 	}
 	
 }

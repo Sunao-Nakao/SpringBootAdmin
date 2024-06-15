@@ -55,6 +55,10 @@
     		<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<dependency>
         	<groupId>net.sf.dozer</groupId>
         	<artifactId>dozer</artifactId>
         	<version>5.5.1</version>

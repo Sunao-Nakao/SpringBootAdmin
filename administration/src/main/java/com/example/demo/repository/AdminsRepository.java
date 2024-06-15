@@ -1,10 +1,15 @@
 package com.example.demo.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.Entity.Admins;
 
+
+
 @Repository
-public interface AdminsRepository extends JpaRepository<Admins, String> {
+public interface AdminsRepository extends JpaRepository<Admins, Long> {
+	Optional<Admins> findByEmail(String email);
 }
